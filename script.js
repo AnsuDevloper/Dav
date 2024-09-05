@@ -14,7 +14,11 @@ async function loadFiles() {
     }
 
     try {
+        // Ensure correct path to fileList.json
         const response = await fetch('fileList.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
         fileData = await response.json();
         if (fileData[selectedClass]) {
             document.getElementById('folderSection').style.display = 'block';
@@ -29,22 +33,14 @@ async function loadFiles() {
 function openFiles(type) {
     const selectedClass = document.getElementById('classSelect').value;
     if (selectedClass && fileData[selectedClass]) {
-        const folderUrl = fileData[selectedClass].files;
-        fetch(folderUrl).then(response => response.text()).then(text => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(text, 'text/html');
-            const links = doc.querySelectorAll('a');
-            links.forEach(link => {
-                const fileUrl = folderUrl + link.getAttribute('href');
-                const fileName = link.getAttribute('href');
-                if (fileName.endsWith('.pdf')) {
-                    window.open(fileUrl, '_blank');
-                } else if (fileName.endsWith('.docx') || fileName.endsWith('.doc')) {
-                    convertDocxToHtml(fileUrl);
-                }
-            });
-        }).catch(error => {
-            console.error('Error fetching folder contents:', error);
+        const files = fileData[selectedClass][type];
+        files.forEach(file => {
+            const fileUrl = `files/${selectedClass}/${file}`;
+            if (file.endsWith('.pdf')) {
+                window.open(fileUrl, '_blank');
+            } else if (file.endsWith('.docx') || file.endsWith('.doc')) {
+                convertDocxToHtml(fileUrl);
+            }
         });
     } else {
         alert('Please select a class first.');
