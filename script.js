@@ -14,16 +14,18 @@ async function loadFiles() {
     }
 
     try {
-        // Ensure correct path to fileList.json
         const response = await fetch('fileList.json');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        fileData = await response.json();
-        if (fileData[selectedClass]) {
+        const data = await response.json();
+        fileData = data.files; // Use the correct JSON path
+        
+        if (fileData.length > 0) {
             document.getElementById('folderSection').style.display = 'block';
         } else {
             alert('No data available for the selected class.');
+            document.getElementById('folderSection').style.display = 'none';
         }
     } catch (error) {
         console.error('Error loading fileList.json:', error);
@@ -32,16 +34,20 @@ async function loadFiles() {
 
 function openFiles(type) {
     const selectedClass = document.getElementById('classSelect').value;
-    if (selectedClass && fileData[selectedClass]) {
-        const files = fileData[selectedClass][type];
-        files.forEach(file => {
-            const fileUrl = `files/${selectedClass}/${file}`;
-            if (file.endsWith('.pdf')) {
-                window.open(fileUrl, '_blank');
-            } else if (file.endsWith('.docx') || file.endsWith('.doc')) {
-                convertDocxToHtml(fileUrl);
-            }
-        });
+    if (selectedClass) {
+        const files = fileData.filter(file => file.path.includes(`Class-${selectedClass.split('-')[1]}`) && file.type === type);
+        if (files.length > 0) {
+            files.forEach(file => {
+                const fileUrl = file.path;
+                if (file.type === 'PDF') {
+                    window.open(fileUrl, '_blank');
+                } else if (file.type === 'Word') {
+                    convertDocxToHtml(fileUrl);
+                }
+            });
+        } else {
+            alert('No files available for this type.');
+        }
     } else {
         alert('Please select a class first.');
     }
