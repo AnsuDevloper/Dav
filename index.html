@@ -3,29 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Library</title>
+    <title>Class Selection</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>DAV Last year question Paper.</h1>
-        <select id="classSelect">
-            <option value="">Select Class</option>
-            <option value="Class-1">Class-1</option>
-            <option value="Class-2">Class-2</option>
-            <option value="Class-3">Class-3</option>
-            <option value="Class-4">Class-4</option>
-            <option value="Class-5">Class-5</option>
-            <option value="Class-6">Class-6</option>
-            <option value="Class-7">Class-7</option>
-            <option value="Class-8">Class-8</option>
-            <option value="Class-9">Class-9</option>
-        </select>
-        <div id="folders" style="display: none;">
-            <button onclick="showFiles('PDF')">PDF</button>
-            <button onclick="showFiles('Word')">Word</button>
-        </div>
-        <ul id="fileList" style="display: none;"></ul>
+        <header class="header">
+            <h1>Select Your Class</h1>
+        </header>
+        <main class="main">
+            <div class="select-box">
+                <label for="classSelect">Choose a Class:</label>
+                <select id="classSelect">
+                    <option value="" disabled selected>Select Class</option>
+                    <!-- Dynamically added options from JS -->
+                </select>
+            </div>
+            <div class="folder-selection" id="folderSection" style="display:none;">
+                <h2>Select Folder</h2>
+                <button class="folder-btn" id="wordBtn">Word Files</button>
+                <button class="folder-btn" id="pdfBtn">PDF Files</button>
+            </div>
+        </main>
+        <footer class="footer">
+            <p>Powered by AI - Built with ❤ for YouTube!</p>
+        </footer>
     </div>
 
     <script src="script.js"></script>
