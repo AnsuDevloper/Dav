@@ -5,23 +5,20 @@ window.onload = function() {
 
     classSelect.addEventListener('change', function() {
         if (classSelect.value) {
-            folders.style.display = 'block';
+            showFiles(classSelect.value);
         } else {
-            folders.style.display = 'none';
             fileList.style.display = 'none';
             fileList.innerHTML = '';
         }
     });
 };
 
-function showFiles(type) {
-    var classSelect = document.getElementById('classSelect');
+function showFiles(className) {
     var fileList = document.getElementById('fileList');
-    var className = classSelect.value;
-    var folderPath = `files/${className}/${type}/`;
+    var folderPath = `files/${className}/`; // Adjusted for all files in the same folder
 
     // Simulate fetching files from the folder
-    fetchFileList(folderPath, type).then(files => {
+    fetchFileList(folderPath).then(files => {
         fileList.innerHTML = '';
         files.forEach(file => {
             var listItem = document.createElement('li');
@@ -46,13 +43,13 @@ function showFiles(type) {
     });
 }
 
-function fetchFileList(folderPath, type) {
+function fetchFileList(folderPath) {
     // Fetch the static JSON file that lists the files
     return fetch('files/fileList.json')
         .then(response => response.json())
         .then(data => {
-            // Filter files based on the folder path and type
-            return data.files.filter(file => file.path.startsWith(folderPath) && file.type === type);
+            // Return files for the selected class folder
+            return data.files.filter(file => file.path.startsWith(folderPath));
         });
 }
 
