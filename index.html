@@ -15,15 +15,23 @@
         <main class="main">
             <div class="select-box">
                 <label for="classSelect">Choose a Class:</label>
-                <select id="classSelect">
+                <select id="classSelect" onchange="showFolders()">
                     <option value="" disabled selected>Select Class</option>
-                    <!-- Classes will be dynamically added here by JS -->
+                    <option value="Class-1">Class-1</option>
+                    <option value="Class-2">Class-2</option>
+                    <option value="Class-3">Class-3</option>
+                    <option value="Class-4">Class-4</option>
+                    <option value="Class-5">Class-5</option>
+                    <option value="Class-6">Class-6</option>
+                    <option value="Class-7">Class-7</option>
+                    <option value="Class-8">Class-8</option>
+                    <option value="Class-9">Class-9</option>
                 </select>
             </div>
             <div class="folder-selection" id="folderSection" style="display:none;">
                 <h2>Select Folder</h2>
-                <button class="folder-btn" id="wordBtn">Word Files</button>
-                <button class="folder-btn" id="pdfBtn">PDF Files</button>
+                <button class="folder-btn" onclick="openFolder('Word')">Word Files</button>
+                <button class="folder-btn" onclick="openFolder('PDF')">PDF Files</button>
             </div>
         </main>
         <footer class="footer">
@@ -31,6 +39,19 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function showFolders() {
+            document.getElementById('folderSection').style.display = 'block';
+        }
+
+        function openFolder(type) {
+            const selectedClass = document.getElementById('classSelect').value;
+            if (selectedClass) {
+                window.open(`files/${selectedClass}/${type}/`, '_blank');
+            } else {
+                alert('Please select a class first.');
+            }
+        }
+    </script>
 </body>
 </html>
