@@ -41,6 +41,8 @@ function openFiles(type) {
                 const fileUrl = file.path;
                 if (file.type === 'PDF') {
                     window.open(fileUrl, '_blank');
+                } else if (file.type === 'Word') {
+                    convertDocxToHtml(fileUrl);
                 }
             });
         } else {
@@ -49,4 +51,9 @@ function openFiles(type) {
     } else {
         alert('Please select a class first.');
     }
+}
+
+function convertDocxToHtml(fileUrl) {
+    // Placeholder for converting DOCX to HTML
+    window.open(fileUrl, '_blank'); // Currently just opens the file
 }
