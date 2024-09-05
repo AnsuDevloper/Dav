@@ -2,9 +2,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hide loading screen and show main content
     document.getElementById('loadingScreen').classList.add('hidden');
     document.querySelector('.container').style.display = 'block';
+    populateClassDropdown();
 });
 
 let fileData = {};
+
+async function populateClassDropdown() {
+    // Populate class dropdown
+    try {
+        const response = await fetch('fileList.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        const classSelect = document.getElementById('classSelect');
+
+        // Populate dropdown with available classes
+        const classes = new Set(data.files.map(file => file.path.split('/')[1]));
+        classes.forEach(cls => {
+            const option = document.createElement('option');
+            option.value = cls;
+            option.textContent = cls;
+            classSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error loading fileList.json:', error);
+    }
+}
 
 async function loadFiles() {
     const selectedClass = document.getElementById('classSelect').value;
@@ -19,9 +43,10 @@ async function loadFiles() {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        fileData = data.files; // Use the correct JSON path
-        
-        if (fileData.length > 0) {
+        fileData = data.files;
+
+        const files = fileData.filter(file => file.path.includes(selectedClass));
+        if (files.length > 0) {
             document.getElementById('folderSection').style.display = 'block';
         } else {
             alert('No data available for the selected class.');
@@ -35,15 +60,19 @@ async function loadFiles() {
 function openFiles(type) {
     const selectedClass = document.getElementById('classSelect').value;
     if (selectedClass) {
-        const files = fileData.filter(file => file.path.includes(`Class-${selectedClass.split('-')[1]}`) && file.type === type);
+        const files = fileData.filter(file => file.path.includes(selectedClass) && file.type === type);
         if (files.length > 0) {
+            // Clear previous file list
+            const fileListDiv = document.getElementById('fileList');
+            fileListDiv.innerHTML = '';
+
             files.forEach(file => {
-                const fileUrl = file.path;
-                if (file.type === 'PDF') {
-                    window.open(fileUrl, '_blank');
-                } else if (file.type === 'Word') {
-                    convertDocxToHtml(fileUrl);
-                }
+                const link = document.createElement('a');
+                link.href = file.path;
+                link.textContent = file.name;
+                link.target = '_blank'; // Open in a new tab
+                fileListDiv.appendChild(link);
+                fileListDiv.appendChild(document.createElement('br'));
             });
         } else {
             alert('No files available for this type.');
@@ -51,9 +80,4 @@ function openFiles(type) {
     } else {
         alert('Please select a class first.');
     }
-}
-
-function convertDocxToHtml(fileUrl) {
-    // Placeholder for converting DOCX to HTML
-    window.open(fileUrl, '_blank'); // Currently just opens the file
 }
