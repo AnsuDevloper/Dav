@@ -1,9 +1,13 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+/* Reset some browser defaults */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,52 +15,76 @@ body {
 }
 
 .container {
+    width: 80%;
+    max-width: 600px;
     background-color: white;
-    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     text-align: center;
 }
 
-h1 {
-    margin-bottom: 20px;
-    color: #0056b3;
+.header {
+    background-color: #0077b6;
+    padding: 20px;
 }
 
-select, button {
-    margin: 10px;
-}
-
-button {
-    background-color: #0056b3;
+.header h1 {
     color: white;
+    font-weight: 700;
+    font-size: 1.8em;
+}
+
+.main {
+    padding: 40px;
+}
+
+.select-box {
+    margin-bottom: 30px;
+}
+
+label {
+    font-size: 1.2em;
+    color: #333;
+}
+
+select {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    font-size: 1.1em;
+    border: 2px solid #0077b6;
+    border-radius: 5px;
+    background-color: #f0f2f5;
+}
+
+.folder-selection {
+    margin-top: 30px;
+}
+
+.folder-btn {
+    margin: 10px;
+    padding: 15px 30px;
     border: none;
-    padding: 10px 20px;
+    background-color: #0077b6;
+    color: white;
+    font-size: 1.2em;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #003d7a;
+.folder-btn:hover {
+    background-color: #005f8b;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+.footer {
+    background-color: #0077b6;
+    padding: 15px;
+    color: white;
 }
 
-li {
-    margin: 10px 0;
+.footer p {
+    font-size: 0.9em;
 }
 
-a {
-    text-decoration: none;
-    color: #0056b3;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #002c70;
-}
