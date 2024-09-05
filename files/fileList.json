@@ -1,13 +1,93 @@
 {
     "files": [
         {
-            "name": "Half-Yearly sst 23-24 exam.pdf",
-            "path": "files/Class-5/Half-Yearly sst 23-24 exam.pdf",
+            "name": "Half-year 22-24 English exam.pdf",
+            "path": "files/Class-5/Half-year 22-24 English exam.pdf",
             "type": "PDF"
         },
         {
-            "name": "example.docx",
-            "path": "files/Class-5/example.docx",
+            "name": "Half-Yearly SST 23-24 exam.pdf",
+            "path": "files/Class-5/Half-Yearly SST 23-24 exam.pdf",
+            "type": "PDF"
+        },
+        {
+            "name": "Hindi 22-23 half-year exam.pdf",
+            "path": "files/Class-5/Hindi 22-23 half-year exam.pdf",
+            "type": "PDF"
+        },
+        {
+            "name": "Math PT-2 or Half-year exam.pdf",
+            "path": "files/Class-5/Math PT-2 or Half-year exam.pdf",
+            "type": "PDF"
+        },
+        {
+            "name": "STD V ENGLISH 2023-24.pdf",
+            "path": "files/Class-5/STD V ENGLISH 2023-24.pdf",
+            "type": "PDF"
+        },
+        {
+            "name": "STD-V HALF YEARLY QUESTION_HINDI.pdf",
+            "path": "files/Class-5/STD-V HALF YEARLY QUESTION_HINDI.pdf",
+            "type": "PDF"
+        },
+        {
+            "name": "V_HY_SCIENCE_QP.pdf",
+            "path": "files/Class-5/V_HY_SCIENCE_QP.pdf",
+            "type": "PDF"
+        },
+        {
+            "name": "V_HY_SST_QP.pdf",
+            "path": "files/Class-5/V_HY_SST_QP.pdf",
+            "type": "PDF"
+        },
+        {
+            "name": "V_MATHS QP.pdf",
+            "path": "files/Class-5/V_MATHS QP.pdf",
+            "type": "PDF"
+        },
+        {
+            "name": "V_SCIENCE_HY.pdf",
+            "path": "files/Class-5/V_SCIENCE_HY.pdf",
+            "type": "PDF"
+        },
+        {
+            "name": "ENG-V-QP.docx",
+            "path": "files/Class-5/ENG-V-QP.docx",
+            "type": "Word"
+        },
+        {
+            "name": "MATH -QP.docx",
+            "path": "files/Class-5/MATH -QP.docx",
+            "type": "Word"
+        },
+        {
+            "name": "V_ENG.docx",
+            "path": "files/Class-5/V_ENG.docx",
+            "type": "Word"
+        },
+        {
+            "name": "V_MATHS.docx",
+            "path": "files/Class-5/V_MATHS.docx",
+            "type": "Word"
+        },
+        {
+            "name": "V_SCIENCE.docx",
+            "path": "files/Class-5/V_SCIENCE.docx",
+            "type": "Word"
+        },
+        {
+            "name": "V_SCIENCE_QP.docx",
+            "path": "files/Class-5/V_SCIENCE_QP.docx",
+            "type": "Word"
+        },
+        {
+            "name": "V_SST.doc",
+            "path": "files/Class-5/V_SST.doc",
+            "type": "Word"
+        },
+        {
+            "name": "V_SST_QP.doc",
+            "path": "files/Class-5/V_SST_QP.doc",
             "type": "Word"
         }
     ]
