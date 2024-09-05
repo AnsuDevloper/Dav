@@ -140,7 +140,7 @@
         <main class="main">
             <div class="select-box">
                 <label for="classSelect">Choose a Class:</label>
-                <select id="classSelect" onchange="loadFolders()">
+                <select id="classSelect" onchange="loadFiles()">
                     <option value="" disabled selected>Select Class</option>
                     <option value="Class-1">Class-1</option>
                     <option value="Class-2">Class-2</option>
@@ -154,9 +154,9 @@
                 </select>
             </div>
             <div class="folder-selection" id="folderSection" style="display:none;">
-                <h2>Select Folder</h2>
-                <button class="folder-btn" onclick="openFolder('Word')">Word Files</button>
-                <button class="folder-btn" onclick="openFolder('PDF')">PDF Files</button>
+                <h2>Select File Type</h2>
+                <button class="folder-btn" onclick="openFiles('PDF')">PDF Files</button>
+                <button class="folder-btn" onclick="openFiles('Word')">Word Files</button>
             </div>
         </main>
         <footer class="footer">
@@ -167,7 +167,7 @@
     <script>
         let fileData = {};
 
-        async function loadFolders() {
+        async function loadFiles() {
             const selectedClass = document.getElementById('classSelect').value;
             if (!selectedClass) {
                 alert('Please select a class first.');
@@ -187,18 +187,38 @@
             }
         }
 
-        function openFolder(type) {
+        function openFiles(type) {
             const selectedClass = document.getElementById('classSelect').value;
             if (selectedClass && fileData[selectedClass]) {
-                const url = fileData[selectedClass][type];
-                if (url) {
-                    window.open(url, '_blank');
+                const folderUrl = fileData[selectedClass].files;
+                const files = getFiles(folderUrl, type);
+                if (files.length > 0) {
+                    files.forEach(file => {
+                        const fileUrl = folderUrl + file;
+                        if (type === 'PDF') {
+                            window.open(fileUrl, '_blank');
+                        } else if (type === 'Word') {
+                            convertDocxToHtml(fileUrl);
+                        }
+                    });
                 } else {
                     alert(`No ${type} files available.`);
                 }
             } else {
                 alert('Please select a class first.');
             }
+        }
+
+        function getFiles(folderUrl, type) {
+            // This function should be updated based on how you serve and list files
+            // It might involve server-side logic or using GitHub API if necessary
+            return []; // Return an array of file names
+        }
+
+        function convertDocxToHtml(fileUrl) {
+            // This function should handle DOCX to HTML conversion
+            // You might need a server-side service or library for this
+            window.open(fileUrl, '_blank'); // As a placeholder
         }
 
         // Hide loading screen and show main content
