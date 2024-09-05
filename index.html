@@ -8,8 +8,24 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Dav Older question paper Website. :) </h1>
-        <ul id="fileList"></ul>
+        <h1>DAV Last year question Paper.</h1>
+        <select id="classSelect">
+            <option value="">Select Class</option>
+            <option value="Class-1">Class-1</option>
+            <option value="Class-2">Class-2</option>
+            <option value="Class-3">Class-3</option>
+            <option value="Class-4">Class-4</option>
+            <option value="Class-5">Class-5</option>
+            <option value="Class-6">Class-6</option>
+            <option value="Class-7">Class-7</option>
+            <option value="Class-8">Class-8</option>
+            <option value="Class-9">Class-9</option>
+        </select>
+        <div id="folders" style="display: none;">
+            <button onclick="showFiles('PDF')">PDF</button>
+            <button onclick="showFiles('Word')">Word</button>
+        </div>
+        <ul id="fileList" style="display: none;"></ul>
     </div>
 
     <script src="script.js"></script>
