@@ -6,8 +6,8 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f0f2f5;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f0f2f5 0%, #c9d6e3 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,22 +16,36 @@ body {
 }
 
 .container {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    max-width: 800px;
+    height: 90%;
     display: flex;
     flex-direction: column;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transform: scale(0.98);
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1);
 }
 
 .header {
     background-color: #0077b6;
-    padding: 20px;
+    padding: 30px;
     text-align: center;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header h1 {
-    color: white;
+    font-size: 2.2em;
     font-weight: 700;
-    font-size: 2em;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
 }
 
 .main {
@@ -41,29 +55,43 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .select-box {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 label {
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #333;
+    margin-bottom: 10px;
+    display: block;
 }
 
 select {
-    margin-top: 10px;
     padding: 10px;
     width: 250px;
     font-size: 1.1em;
     border: 2px solid #0077b6;
     border-radius: 5px;
     background-color: #f0f2f5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    border-color: #005f8b;
+    outline: none;
 }
 
 .folder-selection {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .folder-btn {
@@ -75,16 +103,24 @@ select {
     font-size: 1.2em;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .folder-btn:hover {
     background-color: #005f8b;
+    transform: translateY(-2px);
+}
+
+.folder-btn:active {
+    background-color: #004c6d;
+    transform: translateY(0);
 }
 
 .footer {
     background-color: #0077b6;
-    padding: 15px;
+    padding: 20px;
     color: white;
     text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
