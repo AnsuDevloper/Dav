@@ -11,8 +11,10 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden;
             background: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .loading-screen {
@@ -83,6 +85,7 @@
         .container {
             display: none;
             text-align: center;
+            flex: 1;
             padding: 20px;
         }
 
@@ -123,6 +126,7 @@
             margin-top: 20px;
             font-size: 14px;
             color: #555;
+            text-align: center;
         }
     </style>
 </head>
@@ -164,68 +168,6 @@
         </footer>
     </div>
 
-    <script>
-        let fileData = {};
-
-        async function loadFiles() {
-            const selectedClass = document.getElementById('classSelect').value;
-            if (!selectedClass) {
-                alert('Please select a class first.');
-                return;
-            }
-
-            try {
-                const response = await fetch('fileList.json');
-                fileData = await response.json();
-                if (fileData[selectedClass]) {
-                    document.getElementById('folderSection').style.display = 'block';
-                } else {
-                    alert('No data available for the selected class.');
-                }
-            } catch (error) {
-                console.error('Error loading fileList.json:', error);
-            }
-        }
-
-        function openFiles(type) {
-            const selectedClass = document.getElementById('classSelect').value;
-            if (selectedClass && fileData[selectedClass]) {
-                const folderUrl = fileData[selectedClass].files;
-                const files = getFiles(folderUrl, type);
-                if (files.length > 0) {
-                    files.forEach(file => {
-                        const fileUrl = folderUrl + file;
-                        if (type === 'PDF') {
-                            window.open(fileUrl, '_blank');
-                        } else if (type === 'Word') {
-                            convertDocxToHtml(fileUrl);
-                        }
-                    });
-                } else {
-                    alert(`No ${type} files available.`);
-                }
-            } else {
-                alert('Please select a class first.');
-            }
-        }
-
-        function getFiles(folderUrl, type) {
-            // This function should be updated based on how you serve and list files
-            // It might involve server-side logic or using GitHub API if necessary
-            return []; // Return an array of file names
-        }
-
-        function convertDocxToHtml(fileUrl) {
-            // This function should handle DOCX to HTML conversion
-            // You might need a server-side service or library for this
-            window.open(fileUrl, '_blank'); // As a placeholder
-        }
-
-        // Hide loading screen and show main content
-        window.addEventListener('load', () => {
-            document.getElementById('loadingScreen').classList.add('hidden');
-            document.querySelector('.container').style.display = 'block';
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
