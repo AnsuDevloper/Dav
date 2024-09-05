@@ -21,38 +21,39 @@ function showFiles(type) {
     var folderPath = `files/${className}/${type}/`;
 
     // Simulate fetching files from the folder
-    var files = getFilesFromFolder(folderPath);
+    fetchFileList(folderPath, type).then(files => {
+        fileList.innerHTML = '';
+        files.forEach(file => {
+            var listItem = document.createElement('li');
+            var link = document.createElement('a');
+            link.textContent = file.name;
 
-    fileList.innerHTML = '';
-    files.forEach(file => {
-        var listItem = document.createElement('li');
-        var link = document.createElement('a');
-        link.textContent = file.name;
+            if (file.type === "PDF") {
+                link.href = folderPath + file.name;
+                link.target = "_blank"; // Open PDF in a new tab
+            } else if (file.type === "Word") {
+                link.href = folderPath + file.name;
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    convertWordToHtml(link.href);
+                });
+            }
 
-        if (file.type === "PDF") {
-            link.href = folderPath + file.name;
-            link.target = "_blank"; // Open PDF in a new tab
-        } else if (file.type === "Word") {
-            link.href = folderPath + file.name;
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                convertWordToHtml(link.href);
-            });
-        }
-
-        listItem.appendChild(link);
-        fileList.appendChild(listItem);
+            listItem.appendChild(link);
+            fileList.appendChild(listItem);
+        });
+        fileList.style.display = 'block';
     });
-    fileList.style.display = 'block';
 }
 
-// Simulated function to get files (replace with actual data)
-function getFilesFromFolder(folderPath) {
-    // This needs to be replaced with actual file retrieval logic
-    return [
-        { name: "example.pdf", type: "PDF" },
-        { name: "example.docx", type: "Word" }
-    ];
+function fetchFileList(folderPath, type) {
+    // Fetch the static JSON file that lists the files
+    return fetch('files/fileList.json')
+        .then(response => response.json())
+        .then(data => {
+            // Filter files based on the folder path and type
+            return data.files.filter(file => file.path.startsWith(folderPath) && file.type === type);
+        });
 }
 
 function convertWordToHtml(url) {
