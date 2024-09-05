@@ -1,69 +1,31 @@
-window.onload = function() {
-    var classSelect = document.getElementById('classSelect');
-    var folders = document.getElementById('folders');
-    var fileList = document.getElementById('fileList');
+document.addEventListener('DOMContentLoaded', () => {
+    const classSelect = document.getElementById('classSelect');
+    const folderSection = document.getElementById('folderSection');
+    const wordBtn = document.getElementById('wordBtn');
+    const pdfBtn = document.getElementById('pdfBtn');
 
-    classSelect.addEventListener('change', function() {
-        if (classSelect.value) {
-            showFiles(classSelect.value);
-        } else {
-            fileList.style.display = 'none';
-            fileList.innerHTML = '';
-        }
+    // Classes 1 to 9 in the format "Class-1", "Class-2", etc.
+    const classes = ['Class-1', 'Class-2', 'Class-3', 'Class-4', 'Class-5', 'Class-6', 'Class-7', 'Class-8', 'Class-9'];
+
+    // Dynamically populate the dropdown
+    classes.forEach(cls => {
+        const option = document.createElement('option');
+        option.value = cls;
+        option.textContent = cls;
+        classSelect.appendChild(option);
     });
-};
 
-function showFiles(className) {
-    var fileList = document.getElementById('fileList');
-    var folderPath = `files/${className}/`; // Adjusted for all files in the same folder
-
-    // Simulate fetching files from the folder
-    fetchFileList(folderPath).then(files => {
-        fileList.innerHTML = '';
-        files.forEach(file => {
-            var listItem = document.createElement('li');
-            var link = document.createElement('a');
-            link.textContent = file.name;
-
-            if (file.type === "PDF") {
-                link.href = folderPath + file.name;
-                link.target = "_blank"; // Open PDF in a new tab
-            } else if (file.type === "Word") {
-                link.href = folderPath + file.name;
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    convertWordToHtml(link.href);
-                });
-            }
-
-            listItem.appendChild(link);
-            fileList.appendChild(listItem);
-        });
-        fileList.style.display = 'block';
+    classSelect.addEventListener('change', () => {
+        folderSection.style.display = 'block';
     });
-}
 
-function fetchFileList(folderPath) {
-    // Fetch the static JSON file that lists the files
-    return fetch('files/fileList.json')
-        .then(response => response.json())
-        .then(data => {
-            // Return files for the selected class folder
-            return data.files.filter(file => file.path.startsWith(folderPath));
-        });
-}
+    wordBtn.addEventListener('click', () => {
+        const selectedClass = classSelect.value;
+        window.open(`files/${selectedClass}/Word/`, '_blank');
+    });
 
-function convertWordToHtml(url) {
-    var iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = url;
-    document.body.appendChild(iframe);
-
-    iframe.onload = function() {
-        var content = iframe.contentDocument.body.innerHTML;
-        var newWindow = window.open();
-        newWindow.document.write(content);
-        newWindow.document.close();
-        document.body.removeChild(iframe);
-    };
-}
+    pdfBtn.addEventListener('click', () => {
+        const selectedClass = classSelect.value;
+        window.open(`files/${selectedClass}/PDF/`, '_blank');
+    });
+});
